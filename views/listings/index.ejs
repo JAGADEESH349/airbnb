@@ -1,0 +1,138 @@
+<% layout("/layouts/boilerplate") %>
+
+<!-- Hero Section -->
+<div class="index-hero container mt-4">
+    <h2 class="index-title text-center fw-bold">
+        Find Your Next Stay
+    </h2>
+    <p class="index-subtitle text-center text-muted">
+        Discover amazing hotels and unique places to stay.
+    </p>
+</div>
+
+<!-- Filters -->
+<div class="container my-4">
+
+    <div class="index-filter-bar d-flex justify-content-between align-items-center flex-wrap">
+
+        <!-- Filter Items -->
+        <div class="index-filters d-flex gap-4 overflow-auto pb-2">
+
+            <div class="index-filter-item text-center">
+                <i class="fa-solid fa-house fs-4"></i>
+                <p>Rooms</p>
+            </div>
+
+            <div class="index-filter-item text-center">
+                <i class="fa-solid fa-water fs-4"></i>
+                <p>Beach</p>
+            </div>
+
+            <div class="index-filter-item text-center">
+                <i class="fa-solid fa-mountain fs-4"></i>
+                <p>Mountains</p>
+            </div>
+
+            <div class="index-filter-item text-center">
+                <i class="fa-solid fa-tree fs-4"></i>
+                <p>Forest</p>
+            </div>
+
+            <div class="index-filter-item text-center">
+                <i class="fa-solid fa-person-swimming fs-4"></i>
+                <p>Pools</p>
+            </div>
+
+            <div class="index-filter-item text-center">
+                <i class="fa-solid fa-campground fs-4"></i>
+                <p>Camping</p>
+            </div>
+
+            <div class="index-filter-item text-center">
+                <i class="fa-solid fa-city fs-4"></i>
+                <p>City</p>
+            </div>
+
+            <div class="index-filter-item text-center">
+                <i class="fa-solid fa-snowflake fs-4"></i>
+                <p>Arctic</p>
+            </div>
+
+        </div>
+
+        <!-- Tax Toggle -->
+        <div class="index-tax-toggle border rounded-pill px-4 py-2 mt-3 mt-lg-0">
+
+            <div class="form-check form-switch m-0">
+
+                <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="taxSwitch">
+
+                <label class="form-check-label fw-semibold" for="taxSwitch">
+                    Display Total Before Taxes
+                </label>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Listings -->
+<div class="container">
+
+    <div class="row g-4">
+
+        <% for(const list of listings){ %>
+
+            <div class="col-md-6 col-lg-4 col-xl-3">
+
+                <a
+                    href="/listings/<%= list._id %>"
+                    class="text-decoration-none text-dark">
+
+                    <div class="index-listing-card">
+
+                        <img
+                            src="<%= list.image.url %>"
+                            class="index-listing-image"
+                            alt="<%= list.title %>">
+
+                        <div class="index-listing-content mt-3">
+
+                            <h5 class="index-listing-title">
+                                <%= list.title %>
+                            </h5>
+
+                            <p class="index-listing-location text-muted">
+                                <%= list.location %>, <%= list.country %>
+                            </p>
+
+                            <p class="index-listing-description text-muted">
+                                <%= list.description.substring(0,60) %>...
+                            </p>
+
+                            <h6 class="index-listing-price">
+                                ₹<%= list.price.toLocaleString("en-IN") %>
+                                <span class="fw-normal">night</span>
+                            </h6>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+        <% } %>
+
+    </div>
+
+</div>
+
+<div class="my-5"></div>

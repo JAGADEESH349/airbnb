@@ -1,0 +1,81 @@
+<% layout("/layouts/auth") %>
+
+
+<link rel="stylesheet" href="/css/signup.css">
+
+<div class="signup-container">
+
+    <div class="glass-card">
+
+        <div class="text-center mb-4">
+            <i class="fa-solid fa-house-chimney fa-3x text-danger mb-3"></i>
+
+            <h2>Welcome Back</h2>
+
+            <p class="subtitle">
+                Sign in to continue your StayFinder journey.
+            </p>
+        </div>
+
+        <% if(error && error.length){ %>
+            <div class="glass-alert">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <span><%= error[0] %></span>
+            </div>
+        <% } %>
+
+        <% if(success && success.length){ %>
+            <div class="glass-success">
+                <i class="fa-solid fa-circle-check"></i>
+                <span><%= success[0] %></span>
+            </div>
+        <% } %>
+
+        <form action="/login" method="POST" class="needs-validation" novalidate>
+
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+
+                <input
+                    type="text"
+                    name="username"
+                    class="form-control"
+                    placeholder="Enter username"
+                    required>
+
+                <div class="invalid-feedback">
+                    Username is required.
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label">Password</label>
+
+                <input
+                    type="password"
+                    name="password"
+                    class="form-control"
+                    placeholder="Enter password"
+                    required>
+
+                <div class="invalid-feedback">
+                    Password is required.
+                </div>
+            </div>
+
+            <button class="btn signup-btn">
+                Login
+            </button>
+
+        </form>
+
+        <p class="login-text mt-4">
+            Don't have an account?
+            <a href="/signup">Create one</a>
+        </p>
+
+    </div>
+
+</div>
+
+

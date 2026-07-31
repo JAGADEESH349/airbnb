@@ -1,0 +1,82 @@
+<% layout("/layouts/auth") %>
+<link rel="stylesheet" href="/css/signup.css">
+<div class="signup-container">
+
+
+    <div class="glass-card">
+
+        <h2>Create Account</h2>
+
+        <p class="subtitle">Join us and start exploring.</p>
+
+       <% if(error && error.length){ %>
+<div class="glass-alert">
+    <i class="fa-solid fa-circle-exclamation"></i>
+    <span><%= error[0] %></span>
+</div>
+<% } %> 
+
+        <form action="/signup" method="POST" class="needs-validation" novalidate>
+
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+
+                <input
+                    type="text"
+                    name="username"
+                    class="form-control"
+                    placeholder="Enter username"
+                    required>
+
+                <div class="invalid-feedback">
+                    Username is required.
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+
+                <input
+                    type="email"
+                    name="email"
+                    class="form-control"
+                    placeholder="Enter email"
+                    required>
+
+                <div class="invalid-feedback">
+                    Please enter a valid email.
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label">Password</label>
+
+                <input
+                    type="password"
+                    name="password"
+                    class="form-control"
+                    placeholder="Create password"
+                    minlength="6"
+                    required>
+
+                <div class="invalid-feedback">
+                    Password must contain at least 6 characters.
+                </div>
+            </div>
+
+            <button class="btn signup-btn w-100">
+                Sign Up
+            </button>
+
+        </form>
+
+        <p class="login-text mt-4">
+            Already have an account?
+            <a href="/login">Login</a>
+        </p>
+
+    </div>
+
+</div>
+
+</body>

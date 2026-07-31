@@ -1,0 +1,203 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container new-page-container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-7 col-md-9 col-12">
+
+            <div class="new-form-card">
+
+                <h2 class="new-page-title">
+                    Add a New Hotel
+                </h2>
+
+                <p class="new-page-subtitle">
+                    Fill in the details to list your property.
+                </p>
+
+                <form
+                    method="POST"
+                    action="/listings"
+                    enctype="multipart/form-data"
+                    class="needs-validation new-listing-form"
+                    novalidate
+                >
+
+                    <!-- Title -->
+                    <div class="mb-4">
+
+                        <label class="form-label new-form-label">
+                            Title
+                        </label>
+
+                        <input
+                            type="text"
+                            name="hotel[title]"
+                            class="form-control new-form-input"
+                            placeholder="Add a catchy title"
+                            maxlength="80"
+                            required
+                        >
+
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+
+                        <div class="invalid-feedback">
+                            Please enter a valid title.
+                        </div>
+
+                    </div>
+
+                    <!-- Description -->
+
+                    <div class="mb-4">
+
+                        <label class="form-label new-form-label">
+                            Description
+                        </label>
+
+                        <textarea
+                            name="hotel[description]"
+                            rows="4"
+                            class="form-control new-form-textarea"
+                            placeholder="Describe your hotel..."
+                            required
+                        ></textarea>
+
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+
+                        <div class="invalid-feedback">
+                            Please enter a description.
+                        </div>
+
+                    </div>
+
+                    <!-- Image -->
+
+                    <div class="mb-4">
+
+                        <label class="form-label new-form-label">
+                            Upload Image
+                        </label>
+
+                        <input
+                            type="file"
+                            name="hotel[image]"
+                            class="form-control new-form-file"
+                            required
+                        >
+
+                        <div class="valid-feedback">
+                            Image selected.
+                        </div>
+
+                        <div class="invalid-feedback">
+                            Please upload an image.
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <!-- Price -->
+
+                        <div class="col-md-4 mb-4">
+
+                            <label class="form-label new-form-label">
+                                Price
+                            </label>
+
+                            <input
+                                type="number"
+                                name="hotel[price]"
+                                class="form-control new-form-input"
+                                placeholder="1200"
+                                required
+                            >
+
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+
+                            <div class="invalid-feedback">
+                                Enter a valid price.
+                            </div>
+
+                        </div>
+
+                        <!-- Country -->
+
+                        <div class="col-md-8 mb-4">
+
+                            <label class="form-label new-form-label">
+                                Country
+                            </label>
+
+                            <input
+                                type="text"
+                                name="hotel[country]"
+                                class="form-control new-form-input"
+                                placeholder="India"
+                                required
+                            >
+
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+
+                            <div class="invalid-feedback">
+                                Enter a valid country.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Location -->
+
+                    <div class="mb-4">
+
+                        <label class="form-label new-form-label">
+                            Location
+                        </label>
+
+                        <input
+                            type="text"
+                            name="hotel[location]"
+                            class="form-control new-form-input"
+                            placeholder="Jaipur, Rajasthan"
+                            required
+                        >
+
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+
+                        <div class="invalid-feedback">
+                            Enter a valid location.
+                        </div>
+
+                    </div>
+
+                    <!-- Button -->
+
+                    <button
+                        type="submit"
+                        class="btn btn-success new-submit-btn"
+                    >
+                        Add Hotel
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

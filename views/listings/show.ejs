@@ -1,0 +1,335 @@
+
+
+<% layout("/layouts/boilerplate") %>
+
+<div class="container py-5">
+
+    <!-- Hotel Title -->
+    <div class="text-center mb-4">
+        <h1 class="fw-bold display-5"><%= hotel.title %></h1>
+        <p class="text-muted">
+            <i class="bi bi-geo-alt-fill text-danger"></i>
+            <%= hotel.location %>, <%= hotel.country %>
+        </p>
+    </div>
+
+    <!-- Hotel Image -->
+    <div class="card border-0 shadow-lg rounded-4 overflow-hidden mb-5">
+        <img
+            src="<%= hotel.image.url %>"
+            class="img-fluid"
+            style="height:550px; object-fit:cover;"
+            alt="Hotel Image">
+
+        <div class="card-body p-4">
+
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+
+                <div>
+
+                    <h2 class="text-success fw-bold mb-2">
+                        ₹<%= hotel.price.toLocaleString("en-IN") %>
+                        <small class="text-muted fs-6">/ night</small>
+                    </h2>
+
+                    <p class="text-secondary mb-3">
+                        <i class="bi bi-person-circle"></i>
+                        Hosted by
+                        <strong><%= hotel.owner.username %></strong>
+                    </p>
+
+                </div>
+
+                <% if(currUser && hotel.owner._id.equals(currUser._id)){ %>
+
+                <div class="d-flex gap-2">
+
+                    <a href="/listings/edit/<%= hotel._id %>"
+                       class="btn btn-warning rounded-pill px-4">
+                        <i class="bi bi-pencil-square"></i>
+                        Edit
+                    </a>
+
+                    <form
+                        method="POST"
+                        action="/listings/<%= hotel._id %>?_method=DELETE">
+
+                        <button class="btn btn-danger rounded-pill px-4">
+                            <i class="bi bi-trash"></i>
+                            Delete
+                        </button>
+
+                    </form>
+
+                </div>
+
+                <% } %>
+
+            </div>
+
+            <hr>
+
+            <h4 class="fw-bold mb-3">
+                About this place
+            </h4>
+
+            <p class="text-muted fs-5">
+                <%= hotel.description %>
+            </p>
+
+            <div class="row mt-4">
+
+                <div class="col-md-4 mb-3">
+
+                    <div class="border rounded-4 p-3 text-center">
+
+                        <i class="bi bi-cash-stack display-6 text-success"></i>
+
+                        <h6 class="mt-2">Price</h6>
+
+                        <strong>
+                            ₹<%= hotel.price.toLocaleString("en-IN") %>
+                        </strong>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-4 mb-3">
+
+                    <div class="border rounded-4 p-3 text-center">
+
+                        <i class="bi bi-geo-alt-fill display-6 text-danger"></i>
+
+                        <h6 class="mt-2">Location</h6>
+
+                        <strong>
+                            <%= hotel.location %>
+                        </strong>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-4 mb-3">
+
+                    <div class="border rounded-4 p-3 text-center">
+
+                        <i class="bi bi-globe2 display-6 text-primary"></i>
+
+                        <h6 class="mt-2">Country</h6>
+
+                        <strong>
+                            <%= hotel.country %>
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="mt-4">
+
+                <a href="/listings"
+                   class="btn btn-dark rounded-pill px-5">
+
+                    ← Back to Listings
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+<% if(currUser){ %>
+
+<div class="card border-0 shadow-lg rounded-4 p-4 mb-5">
+
+    <h3 class="fw-bold mb-4 text-center">
+        Leave a Review
+    </h3>
+
+    <form
+        action="/listings/<%= hotel._id %>/reviews"
+        method="POST"
+        novalidate
+        class="needs-validation">
+
+        <!-- Rating -->
+
+        <div class="mb-4 text-center">
+
+            <label class="fw-semibold mb-3">
+                Your Rating
+            </label>
+
+            <div class="rating">
+
+                <input type="radio" id="star5" name="review[rating]" value="5" onclick="updateRating(5)">
+                <label for="star5">★</label>
+
+                <input type="radio" id="star4" name="review[rating]" value="4" onclick="updateRating(4)">
+                <label for="star4">★</label>
+
+                <input type="radio" id="star3" name="review[rating]" value="3" onclick="updateRating(3)">
+                <label for="star3">★</label>
+
+                <input type="radio" id="star2" name="review[rating]" value="2" onclick="updateRating(2)">
+                <label for="star2">★</label>
+
+                <input type="radio" id="star1" name="review[rating]" value="1" required onclick="updateRating(1)">
+                <label for="star1">★</label>
+
+            </div>
+
+            <div class="mt-2">
+
+                <span class="badge bg-warning text-dark fs-6">
+                    Rating :
+                    <span id="ratingValue">0</span>/5
+                </span>
+
+            </div>
+
+        </div>
+
+        <!-- Comment -->
+
+        <div class="mb-4">
+
+            <label class="form-label fw-semibold">
+                Share your experience
+            </label>
+
+            <textarea
+                class="form-control rounded-4"
+                rows="4"
+                id="comment"
+                name="review[comment]"
+                placeholder="Tell others about your stay..."
+                required></textarea>
+
+            <div class="invalid-feedback">
+                Please enter your review.
+            </div>
+
+        </div>
+
+        <div class="text-center">
+
+            <button class="btn btn-primary rounded-pill px-5 py-2">
+
+                Submit Review
+
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+<% } %>
+<hr>
+<h2>All Reviews</h2>
+   <hr class="my-5">
+
+<hr class="my-5">
+
+<h2 class="text-center fw-bold mb-5">
+    What Guests Say
+</h2>
+
+<div class="row justify-content-center">
+
+<% if(hotel.Reviews && hotel.Reviews.length > 0){ %>
+
+    <% for(let review of hotel.Reviews){ %>
+
+        <div class="col-lg-8 mb-4">
+
+            <div class="review-card">
+
+                <div class="review-header">
+
+                    <div class="d-flex align-items-center">
+
+                        <div class="review-avatar">
+                            <%= review.author.username.charAt(0).toUpperCase() %>
+                        </div>
+
+                        <div class="ms-3">
+
+                            <h5 class="mb-0 fw-bold">
+                                <%= review.author.username %>
+                            </h5>
+
+                            <small class="text-muted">
+                                Verified Guest
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    <div class="review-rating">
+                        ⭐ <%= review.rating %>/5
+                    </div>
+
+                </div>
+
+                <div class="review-body">
+
+                    <p class="review-text">
+                        <%= review.comment %>
+                    </p>
+
+                </div>
+
+                <% if(currUser && review.author.equals(currUser._id)){ %>
+
+                <div class="review-footer">
+
+                    <form
+                        method="POST"
+                        action="/listings/<%= hotel._id %>/reviews/<%= review._id %>?_method=DELETE">
+
+                        <button class="btn btn-outline-danger rounded-pill btn-sm">
+                            <i class="bi bi-trash"></i>
+                            Delete Review
+                        </button>
+
+                    </form>
+
+                </div>
+
+                <% } %>
+
+            </div>
+
+        </div>
+
+    <% } %>
+
+<% } else { %>
+
+<div class="col-lg-8">
+
+    <div class="text-center p-5 shadow-sm rounded-4 bg-light">
+
+        <h4>No Reviews Yet</h4>
+
+        <p class="text-muted">
+            Be the first person to share your experience.
+        </p>
+
+    </div>
+
+</div>
+
+<% } %>
+
+</div>
